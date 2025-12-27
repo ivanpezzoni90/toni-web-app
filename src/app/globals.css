@@ -1,0 +1,78 @@
+:root {
+  --ink: #20180f;
+  --ink-muted: #5e4f45;
+  --cream: #fbf1de;
+  --butter: #f4d07d;
+  --cacao: #7a4b2a;
+  --peach: #f3b49f;
+  --sage: #8aa889;
+  --shadow: rgba(32, 24, 15, 0.12);
+  --glow: rgba(243, 180, 159, 0.25);
+  --surface: rgba(255, 255, 255, 0.86);
+  --surface-strong: rgba(255, 255, 255, 0.96);
+  --border: rgba(122, 75, 42, 0.18);
+  --font-display: "Playfair Display", serif;
+  --font-text: "Manrope", sans-serif;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 12% 20%, rgba(244, 208, 125, 0.35), transparent 52%),
+    radial-gradient(circle at 80% 10%, rgba(243, 180, 159, 0.35), transparent 55%),
+    linear-gradient(140deg, #fff7e8 0%, #fef4e6 45%, #f9efe0 100%);
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  border-radius: 999px;
+  filter: blur(0);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+body::before {
+  width: 320px;
+  height: 320px;
+  top: -120px;
+  right: 5%;
+  background: radial-gradient(circle, rgba(138, 168, 137, 0.35), transparent 70%);
+}
+
+body::after {
+  width: 220px;
+  height: 220px;
+  bottom: -90px;
+  left: 6%;
+  background: radial-gradient(circle, rgba(122, 75, 42, 0.15), transparent 70%);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}

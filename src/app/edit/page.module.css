@@ -1,0 +1,74 @@
+.page {
+  padding: 48px clamp(20px, 6vw, 72px) 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  margin: 8px 0;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+.listSection {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 12px 22px var(--shadow);
+}
+
+.listSection h2 {
+  font-family: var(--font-display);
+  margin-bottom: 12px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.listItem {
+  border: 1px solid rgba(122, 75, 42, 0.2);
+  border-radius: 16px;
+  background: var(--surface-strong);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.listItem em {
+  font-style: normal;
+  color: var(--ink-muted);
+  font-size: 12px;
+}
+
+.empty,
+.notFound {
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 32px 16px 60px;
+  }
+
+  .listSection {
+    padding: 18px;
+  }
+}

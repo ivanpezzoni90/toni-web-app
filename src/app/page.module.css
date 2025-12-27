@@ -1,0 +1,253 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 48px clamp(20px, 6vw, 72px) 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: floatIn 0.7s ease-out;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  align-items: center;
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.logoWrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.brand img {
+  width: 48px;
+  height: 48px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4vw, 56px);
+  margin: 12px 0 10px;
+}
+
+.hero p {
+  color: var(--ink-muted);
+  max-width: 520px;
+}
+
+.heroCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 18px 32px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heroCard h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.statsGrid span {
+  color: var(--ink-muted);
+  font-size: 12px;
+}
+
+.statsGrid strong {
+  font-family: var(--font-display);
+  font-size: 26px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionHeader h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.recipeCard {
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  box-shadow: 0 12px 24px var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipeCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px var(--shadow);
+}
+
+.cardCategory {
+  color: var(--cacao);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.recipeCard h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  margin: 8px 0;
+}
+
+.cardMeta {
+  color: var(--ink-muted);
+}
+
+.cardActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton,
+.ghostButton,
+.textButton {
+  border-radius: 999px;
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.primaryButton {
+  background: var(--cacao);
+  color: #fff;
+  text-align: center;
+}
+
+.secondaryButton {
+  background: var(--butter);
+  color: var(--ink);
+}
+
+.ghostButton {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.textButton {
+  background: transparent;
+  color: var(--ink-muted);
+}
+
+.emptyState {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px dashed var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 32px 16px 110px;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cardActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryButton,
+  .secondaryButton,
+  .ghostButton,
+  .textButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.mobileStickyCreate {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .mobileStickyCreate {
+    display: inline-flex;
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 20px;
+    border-radius: 999px;
+    background: var(--cacao);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 14px 24px rgba(122, 75, 42, 0.35);
+    z-index: 20;
+  }
+}

@@ -1,3 +1,8 @@
+@use "../styles/mixins" as m;
+@use "../styles/tokens" as t;
+
+$header-shadow: t.$shadow-header;
+
 .outer {
   position: sticky;
   top: 0;
@@ -6,7 +11,7 @@
   overflow-x: clip;
   background: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 8px 18px var(--shadow);
+  box-shadow: $header-shadow;
   backdrop-filter: blur(12px);
 }
 
@@ -32,11 +37,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-}
 
-.logoWrap img {
-  width: 36px;
-  height: 36px;
+  img {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .titleWrap {
@@ -48,12 +53,8 @@
 }
 
 .backButton {
-  border-radius: 999px;
+  @include m.pill-button(transparent, var(--ink), 1px solid var(--border));
   padding: 10px 16px;
-  border: 1px solid var(--border);
-  background: transparent;
-  font-weight: 600;
-  cursor: pointer;
 }
 
 .hint {
@@ -74,9 +75,11 @@
     padding: 10px 12px;
   }
 
-  .logoWrap img {
-    width: 48px;
-    height: 48px;
+  .logoWrap {
+    img {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   .backButton {

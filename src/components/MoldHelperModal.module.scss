@@ -1,3 +1,6 @@
+@use "../styles/mixins" as m;
+@use "../styles/tokens" as t;
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -16,7 +19,7 @@
   max-width: 900px;
   width: 100%;
   padding: 24px;
-  box-shadow: 0 20px 40px var(--shadow);
+  box-shadow: t.$shadow-card;
 }
 
 .header {
@@ -54,12 +57,7 @@
 
 .field input,
 .field select {
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface-strong);
-  color: var(--ink);
-  font-size: 15px;
+  @include m.input-field();
 }
 
 .helperBox {
@@ -81,13 +79,7 @@
 }
 
 .secondaryButton {
-  border-radius: 999px;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  background: var(--butter);
-  color: var(--ink);
+  @include m.pill-button(var(--butter), var(--ink));
 }
 
 .iconButton {

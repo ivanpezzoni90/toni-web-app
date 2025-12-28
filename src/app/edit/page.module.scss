@@ -1,3 +1,6 @@
+@use "../../styles/mixins" as m;
+@use "../../styles/tokens" as t;
+
 .page {
   padding: 48px clamp(20px, 6vw, 72px) 80px;
   max-width: 1200px;
@@ -21,11 +24,7 @@
 }
 
 .listSection {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 12px 22px var(--shadow);
+  @include m.card-surface(20px, t.$shadow-soft);
 }
 
 .listSection h2 {

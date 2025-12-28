@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import MoldHelperModal from "@/components/MoldHelperModal";
-import { makeId, slugify } from "@/lib/slug";
-import { formatNumber, fromUnit, toUnit, unitOptions } from "@/lib/units";
+import MoldHelperModal from "@components/MoldHelperModal";
+import { makeId, slugify } from "@lib/slug";
+import { formatNumber, fromUnit, toUnit, unitOptions } from "@lib/units";
 import type {
   Dough,
   Ingredient,
@@ -12,9 +12,9 @@ import type {
   Recipe,
   RecipeStep,
   Starter,
-} from "@/lib/types";
-import { normalizeMoldSelection } from "@/lib/moldHelpers";
-import styles from "./RecipeForm.module.css";
+} from "@lib/types";
+import { normalizeMoldSelection } from "@lib/moldHelpers";
+import styles from "./RecipeForm.module.scss";
 
 const categoryOptions: Recipe["category"][] = [
   "Panettone",
@@ -337,7 +337,9 @@ export default function RecipeForm({
   const handleStarterDescription = (starterId: string, textValue: string) => {
     setStarters((items) =>
       items.map((starter) =>
-        starter.id === starterId ? { ...starter, description: textValue } : starter
+        starter.id === starterId
+          ? { ...starter, description: textValue }
+          : starter
       )
     );
   };
@@ -545,11 +547,11 @@ export default function RecipeForm({
         </div>
         <div className={styles.metricBar}>
           <div>
-            <p>Total dough target</p>
+            <span>Total dough target</span>
             <strong>{formatNumber(totalDough, 0)} g</strong>
           </div>
           <div>
-            <p>Total flour base</p>
+            <span>Total flour base</span>
             <strong>{formatNumber(flourBase, 0)} g</strong>
           </div>
           <div>

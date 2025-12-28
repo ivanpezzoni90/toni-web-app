@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import styles from "./GlobalHeader.module.css";
+import styles from "./GlobalHeader.module.scss";
 
 export default function GlobalHeader() {
   const pathname = usePathname();

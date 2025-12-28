@@ -1,3 +1,6 @@
+@use "../styles/mixins" as m;
+@use "../styles/tokens" as t;
+
 .page {
   display: flex;
   flex-direction: column;
@@ -26,11 +29,11 @@
 .logoWrap {
   display: flex;
   justify-content: flex-start;
-}
 
-.brand img {
-  width: 48px;
-  height: 48px;
+  img {
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .eyebrow {
@@ -57,7 +60,7 @@
   border: 1px solid var(--border);
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 18px 32px var(--shadow);
+  box-shadow: t.$shadow-card;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -117,13 +120,13 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 180px;
-  box-shadow: 0 12px 24px var(--shadow);
+  box-shadow: t.$shadow-soft;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .recipeCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 30px var(--shadow);
+  box-shadow: t.$shadow-card;
 }
 
 .cardCategory {
@@ -150,37 +153,30 @@
   flex-wrap: wrap;
 }
 
-.primaryButton,
-.secondaryButton,
-.ghostButton,
-.textButton {
-  border-radius: 999px;
-  padding: 10px 18px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-}
-
 .primaryButton {
-  background: var(--cacao);
-  color: #fff;
+  @include m.pill-button(var(--cacao), #fff);
+  padding: 10px 18px;
   text-align: center;
 }
 
 .secondaryButton {
-  background: var(--butter);
-  color: var(--ink);
+  @include m.pill-button(var(--butter), var(--ink));
+  padding: 10px 18px;
 }
 
 .ghostButton {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--ink);
+  @include m.pill-button(transparent, var(--ink), 1px solid var(--border));
+  padding: 10px 18px;
 }
 
 .textButton {
+  border-radius: t.$radius-pill;
+  padding: 10px 18px;
   background: transparent;
   color: var(--ink-muted);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .emptyState {
@@ -247,7 +243,7 @@
     background: var(--cacao);
     color: #fff;
     font-weight: 700;
-    box-shadow: 0 14px 24px rgba(122, 75, 42, 0.35);
+    box-shadow: t.$shadow-cta-strong;
     z-index: 20;
   }
 }

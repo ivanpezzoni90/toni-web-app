@@ -2,12 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { findRecipeByIdentifier, loadRecipes } from "@/lib/storage";
-import type { Ingredient, Recipe } from "@/lib/types";
-import { formatNumber, toUnit } from "@/lib/units";
-import MoldHelperModal from "@/components/MoldHelperModal";
-import { normalizeMoldSelection } from "@/lib/moldHelpers";
-import styles from "./page.module.css";
+import { findRecipeByIdentifier, loadRecipes } from "@lib/storage";
+import type { Ingredient, Recipe } from "@lib/types";
+import { formatNumber, toUnit } from "@lib/units";
+import MoldHelperModal from "@components/MoldHelperModal";
+import { normalizeMoldSelection } from "@lib/moldHelpers";
+import styles from "./page.module.scss";
 
 function ingredientGrams(
   ingredient: Ingredient,

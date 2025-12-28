@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import { moldPresets } from "@/lib/molds";
-import type { Recipe } from "@/lib/types";
-import { sizeKey, sizeLabel } from "@/lib/moldHelpers";
-import styles from "./MoldHelperModal.module.css";
+import { moldPresets } from "@lib/molds";
+import type { Recipe } from "@lib/types";
+import { sizeKey, sizeLabel } from "@lib/moldHelpers";
+import styles from "./MoldHelperModal.module.scss";
 
 type MoldHelperModalProps = {
   open: boolean;

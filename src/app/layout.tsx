@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
-import "./globals.css";
-import GlobalHeader from "@/components/GlobalHeader";
+import "./globals.scss";
+import GlobalHeader from "@components/GlobalHeader";
 
 const display = Playfair_Display({
   variable: "--font-display",

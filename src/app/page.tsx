@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import type { Recipe } from "@/lib/types";
-import { deleteRecipeById, loadRecipes } from "@/lib/storage";
-import styles from "./page.module.css";
+import type { Recipe } from "@lib/types";
+import { deleteRecipeById, loadRecipes } from "@lib/storage";
+import styles from "./page.module.scss";
 
 export default function Home() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);

@@ -2,14 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import RecipeForm from "@/components/RecipeForm";
+import RecipeForm from "@components/RecipeForm";
 import {
   findRecipeByIdentifier,
   loadRecipes,
   upsertRecipe,
-} from "@/lib/storage";
-import type { Recipe } from "@/lib/types";
-import styles from "./page.module.css";
+} from "@lib/storage";
+import type { Recipe } from "@lib/types";
+import styles from "./page.module.scss";
 
 export default function EditIndexPage() {
   const router = useRouter();

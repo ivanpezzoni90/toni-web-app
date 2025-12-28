@@ -1,0 +1,30 @@
+@use "tokens" as t;
+
+@mixin pill-button($bg, $color, $border: none, $shadow: none) {
+  border-radius: t.$radius-pill;
+  padding: 12px 20px;
+  border: $border;
+  background: $bg;
+  color: $color;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: $shadow;
+}
+
+@mixin card-surface($padding: 24px, $shadow: t.$shadow-card) {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: t.$radius-card;
+  padding: $padding;
+  box-shadow: $shadow;
+  backdrop-filter: blur(12px);
+}
+
+@mixin input-field($padding: 12px 14px, $radius: t.$radius-field) {
+  padding: $padding;
+  border-radius: $radius;
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+  color: var(--ink);
+  font-size: 15px;
+}

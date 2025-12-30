@@ -636,8 +636,7 @@ export default function RecipeForm({
                     <span>Group</span>
                     <span>Quantity</span>
                     <span>Unit</span>
-                    {showBakers ? <span>%</span> : null}
-                    <span>Total</span>
+                    <span />
                     <span />
                   </div>
                   {starter.ingredients.map((ingredient) => {

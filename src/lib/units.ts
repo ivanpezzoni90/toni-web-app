@@ -6,6 +6,7 @@ const UNIT_TO_GRAMS: Record<IngredientUnit, number> = {
   lb: 453.592,
   cup: 120,
   qty: 1,
+  ml: 1,
 };
 
 export const unitOptions: { value: IngredientUnit; label: string }[] = [
@@ -13,7 +14,8 @@ export const unitOptions: { value: IngredientUnit; label: string }[] = [
   { value: "oz", label: "oz" },
   { value: "lb", label: "lb" },
   { value: "cup", label: "cup (est.)" },
-  { value: "qty", label: "qty" },
+  { value: "qty", label: "pieces" },
+  { value: "ml", label: "ml" },
 ];
 
 export function toUnit(grams: number, unit: IngredientUnit): number {

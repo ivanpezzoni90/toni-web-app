@@ -18,7 +18,7 @@
   border: 1px solid var(--border);
   max-width: 900px;
   width: 100%;
-  padding: 24px;
+  padding: 18px;
   box-shadow: t.$shadow-card;
 }
 
@@ -40,10 +40,10 @@
 }
 
 .gridThree {
-  display: grid;
-  grid-template-columns: 3fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  align-items: end;
+  align-items: stretch;
 }
 
 .field {
@@ -71,8 +71,8 @@
 
 .moldDetails {
   margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   font-size: 14px;
   color: var(--ink-muted);
@@ -93,8 +93,29 @@
   font-size: 16px;
 }
 
-@media (max-width: 720px) {
+@media (min-width: 720px) {
   .modal {
-    padding: 18px;
+    padding: 24px;
+  }
+
+  .gridThree {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  .gridThree > * {
+    flex: 1 1 220px;
+    min-width: 0;
+  }
+
+  .moldDetails {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .moldDetails > * {
+    flex: 1 1 220px;
+    min-width: 0;
   }
 }

@@ -2,7 +2,7 @@
 @use "../../styles/tokens" as t;
 
 .page {
-  padding: 24px clamp(20px, 6vw, 72px) 80px;
+  padding: 32px 16px 110px;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -25,6 +25,7 @@
 
 .listSection {
   @include m.card-surface(20px, t.$shadow-soft);
+  padding: 18px;
 
   h2 {
     font-family: var(--font-display);
@@ -33,9 +34,14 @@
 }
 
 .list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+}
+
+.list > * {
+  flex: 1 1 200px;
+  min-width: 0;
 }
 
 .listItem {
@@ -72,8 +78,9 @@
   @include m.card-surface(24px, t.$shadow-card);
   border-radius: 26px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 16px;
+  padding: 18px;
 }
 
 .category {
@@ -95,9 +102,10 @@
 }
 
 .stats {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  text-align: right;
+  text-align: left;
 }
 
 .stats span {
@@ -113,8 +121,8 @@
 
 .scaleCard {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
   background: rgba(244, 208, 125, 0.3);
   border-radius: 22px;
@@ -135,15 +143,18 @@
 .scaleInputs {
   display: flex;
   gap: 16px;
-  align-items: flex-end;
+  align-items: stretch;
   flex-wrap: wrap;
+  width: 100%;
+  flex-direction: column;
 }
 
 .scaleControls {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: flex-end;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .scaleInputs label {
@@ -172,11 +183,13 @@
 .scaleInputs input {
   @include m.input-field(10px 12px, t.$radius-field);
   min-width: 140px;
+  width: 100%;
 }
 
 .scaleInputs select {
   @include m.input-field(10px 12px, t.$radius-field);
   min-width: 140px;
+  width: 100%;
 }
 
 .scaleNote {
@@ -195,6 +208,7 @@
 
 .card {
   @include m.card-surface(22px, t.$shadow-card);
+  padding: 18px;
 }
 
 .cardHeader {
@@ -215,7 +229,8 @@
 }
 
 .recap {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -227,10 +242,12 @@
   padding: 12px 14px;
   background: var(--surface-strong);
   border-radius: 12px;
+  box-shadow: t.$shadow-soft;
 }
 
 .doughs {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -254,7 +271,8 @@
 }
 
 .doughList {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
@@ -279,7 +297,8 @@
 }
 
 .steps {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -325,78 +344,78 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (min-width: 900px) {
+  .page {
+    padding: 24px clamp(20px, 6vw, 72px) 80px;
+  }
+
   .heroCard {
-    flex-direction: column;
-    text-align: left;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .stats {
-    text-align: left;
+    text-align: right;
   }
 
   .scaleCard {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .scaleControls {
-    width: 100%;
-    align-items: flex-start;
-  }
-
-  .scaleInputs {
-    width: 100%;
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .scaleInputs input {
-    width: 100%;
-  }
-}
-
-@media (max-width: 720px) {
-  .page {
-    padding: 32px 16px 110px;
-  }
-
-  .heroCard,
-  .card,
-  .listSection {
-    padding: 18px;
-  }
-
-  .recapRow,
-  .doughRow {
     flex-direction: row;
     align-items: center;
   }
 
-  .valueRight {
-    text-align: right;
+  .scaleControls {
+    width: auto;
+    align-items: flex-end;
+  }
+
+  .scaleInputs {
+    width: auto;
+    align-items: flex-end;
+    flex-direction: row;
+  }
+
+  .scaleInputs input {
+    width: auto;
+  }
+}
+
+@media (min-width: 720px) {
+  .heroCard {
+    padding: 24px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .listSection {
+    padding: 20px;
+  }
+
+  .scaleInputs select {
+    width: auto;
   }
 }
 
 .mobileStickyEdit {
-  display: none;
+  display: inline-flex;
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: var(--cacao);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: t.$shadow-cta-strong;
+  z-index: 20;
 }
 
-@media (max-width: 720px) {
+@media (min-width: 720px) {
   .mobileStickyEdit {
-    display: inline-flex;
-    position: fixed;
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
-    justify-content: center;
-    align-items: center;
-    padding: 14px 20px;
-    border-radius: 999px;
-    background: var(--cacao);
-    color: #fff;
-    font-weight: 700;
-    box-shadow: t.$shadow-cta-strong;
-    z-index: 20;
+    display: none;
   }
 }

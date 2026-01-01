@@ -12,7 +12,7 @@ export type MoldPreset = {
 
 export type IngredientGroup =
   | "Flour"
-  | "Starter"
+  | "Yeast"
   | "Liquid"
   | "Eggs"
   | "Fat"
@@ -21,7 +21,7 @@ export type IngredientGroup =
   | "Aromatic"
   | "Other";
 
-export type IngredientUnit = "g" | "oz" | "lb" | "cup" | "qty";
+export type IngredientUnit = "g" | "oz" | "lb" | "cup" | "qty" | "ml";
 
 export type Ingredient = {
   id: string;

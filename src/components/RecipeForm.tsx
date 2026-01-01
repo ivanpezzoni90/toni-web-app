@@ -9,12 +9,14 @@ import type {
   Dough,
   Ingredient,
   IngredientGroup,
+  IngredientUnit,
   Recipe,
   RecipeStep,
   Starter,
 } from "@lib/types";
 import { normalizeMoldSelection } from "@lib/moldHelpers";
 import styles from "./RecipeForm.module.scss";
+import { mergeClassNames } from "@/lib/helpers";
 
 const categoryOptions: Recipe["category"][] = [
   "Panettone",
@@ -25,7 +27,7 @@ const categoryOptions: Recipe["category"][] = [
 ];
 
 const ingredientGroups: IngredientGroup[] = [
-  "Starter",
+  "Yeast",
   "Flour",
   "Liquid",
   "Eggs",
@@ -35,6 +37,22 @@ const ingredientGroups: IngredientGroup[] = [
   "Aromatic",
   "Other",
 ];
+
+const defaultUnitByGroup: Record<IngredientGroup, IngredientUnit> = {
+  Yeast: "g",
+  Flour: "g",
+  Liquid: "g",
+  Eggs: "qty",
+  Fat: "g",
+  Sugar: "g",
+  Salt: "g",
+  Aromatic: "g",
+  Other: "g",
+};
+
+function defaultUnitForGroup(group: IngredientGroup): IngredientUnit {
+  return defaultUnitByGroup[group] ?? "g";
+}
 
 const defaultStepOrder = [
   "pre-yeast",
@@ -57,7 +75,12 @@ const defaultIngredient: Ingredient = {
 };
 
 function createIngredient(): Ingredient {
-  return { ...defaultIngredient, id: makeId() };
+  const group = defaultIngredient.group;
+  return {
+    ...defaultIngredient,
+    id: makeId(),
+    unit: defaultUnitForGroup(group),
+  };
 }
 
 function createDough(name = "Main dough", ingredients?: Ingredient[]): Dough {
@@ -627,18 +650,6 @@ export default function RecipeForm({
                   />
                 </label>
                 <div className={styles.ingredientsTable}>
-                  <div
-                    className={`${styles.tableHeader} ${
-                      showBakers ? "" : styles.noPercent
-                    }`}
-                  >
-                    <span>Ingredient</span>
-                    <span>Group</span>
-                    <span>Quantity</span>
-                    <span>Unit</span>
-                    <span />
-                    <span />
-                  </div>
                   {starter.ingredients.map((ingredient) => {
                     const displayValue = formatNumber(
                       toUnit(ingredient.qty_g, ingredient.unit),
@@ -675,11 +686,19 @@ export default function RecipeForm({
                         <div className={styles.cell} data-label="Group">
                           <select
                             value={ingredient.group}
-                            onChange={(event) =>
+                            onChange={(event) => {
+                              const nextGroup =
+                                event.target.value as IngredientGroup;
+                              const nextUnit = defaultUnitForGroup(nextGroup);
                               handleStarterUpdate(starter.id, ingredient.id, {
-                                group: event.target.value as IngredientGroup,
-                              })
-                            }
+                                group: nextGroup,
+                                unit: nextUnit,
+                                qty_weight_g:
+                                  nextUnit === "qty"
+                                    ? ingredient.qty_weight_g
+                                    : undefined,
+                              });
+                            }}
                           >
                             {ingredientGroups.map((group) => (
                               <option key={group} value={group}>
@@ -873,19 +892,6 @@ export default function RecipeForm({
                 ) : null}
               </div>
               <div className={styles.ingredientsTable}>
-                <div
-                  className={`${styles.tableHeader} ${
-                    showBakers ? "" : styles.noPercent
-                  }`}
-                >
-                  <span>Ingredient</span>
-                  <span>Group</span>
-                  <span>Quantity</span>
-                  <span>Unit</span>
-                  {showBakers ? <span>%</span> : null}
-                  <span>Total</span>
-                  <span />
-                </div>
                 {dough.ingredients.map((ingredient) => {
                   const displayValue = formatNumber(
                     toUnit(ingredient.qty_g, ingredient.unit),
@@ -920,11 +926,19 @@ export default function RecipeForm({
                       <div className={styles.cell} data-label="Group">
                         <select
                           value={ingredient.group}
-                          onChange={(event) =>
+                          onChange={(event) => {
+                            const nextGroup =
+                              event.target.value as IngredientGroup;
+                            const nextUnit = defaultUnitForGroup(nextGroup);
                             handleIngredientUpdate(dough.id, ingredient.id, {
-                              group: event.target.value as IngredientGroup,
-                            })
-                          }
+                              group: nextGroup,
+                              unit: nextUnit,
+                              qty_weight_g:
+                                nextUnit === "qty"
+                                  ? ingredient.qty_weight_g
+                                  : undefined,
+                            });
+                          }}
                         >
                           {ingredientGroups.map((group) => (
                             <option key={group} value={group}>
@@ -965,25 +979,28 @@ export default function RecipeForm({
                             ))}
                           </select>
                           {ingredient.unit === "qty" ? (
-                            <input
-                              type="number"
-                              min={0}
-                              className={styles.unitWeight}
-                              value={ingredient.qty_weight_g ?? ""}
-                              onChange={(event) =>
-                                handleIngredientUpdate(
-                                  dough.id,
-                                  ingredient.id,
-                                  {
-                                    qty_weight_g:
-                                      event.target.value === ""
-                                        ? undefined
-                                        : Number(event.target.value),
-                                  }
-                                )
-                              }
-                              placeholder="g per qty"
-                            />
+                            <div className={styles.subField}>
+                              <label>weight per piece</label>
+                              <input
+                                type="number"
+                                min={0}
+                                className={styles.unitWeight}
+                                value={ingredient.qty_weight_g ?? ""}
+                                onChange={(event) =>
+                                  handleIngredientUpdate(
+                                    dough.id,
+                                    ingredient.id,
+                                    {
+                                      qty_weight_g:
+                                        event.target.value === ""
+                                          ? undefined
+                                          : Number(event.target.value),
+                                    }
+                                  )
+                                }
+                                placeholder={`${ingredient.unit} per qty`}
+                              />
+                            </div>
                           ) : null}
                         </div>
                       </div>

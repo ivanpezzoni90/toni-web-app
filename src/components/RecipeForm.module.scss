@@ -4,18 +4,18 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  padding: 24px clamp(20px, 6vw, 72px) 80px;
-  max-width: 1200px;
+  gap: 20px;
+  padding: 0;
+  max-width: 1920px;
   margin: 0 auto;
   animation: rise 0.7s ease-out;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
-  align-items: flex-end;
 }
 
 .eyebrow {
@@ -38,7 +38,10 @@
 
 .headerActions {
   display: flex;
+  flex-direction: column;
   gap: 12px;
+  width: 100%;
+  align-items: stretch;
 }
 
 .primaryButton {
@@ -53,6 +56,13 @@
   @include m.pill-button(transparent, var(--ink), 1px solid var(--border));
 }
 
+.primaryButton,
+.secondaryButton,
+.ghostButton {
+  width: 100%;
+  text-align: center;
+}
+
 .error {
   background: rgba(255, 235, 230, 0.9);
   color: #7a2f1c;
@@ -63,6 +73,7 @@
 
 .card {
   @include m.card-surface();
+  padding: 18px;
 }
 
 .cardHeader {
@@ -108,22 +119,20 @@
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .gridTwo,
 .gridThree {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
-.gridTwo {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.gridThree {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  align-items: end;
+.gridTwo > *,
+.gridThree > * {
+  min-width: 0;
 }
 
 .field {
@@ -139,6 +148,10 @@
 .field select,
 .field textarea {
   @include m.input-field();
+}
+
+.field textarea {
+  margin-bottom: 8px;
 }
 
 .helperPrompt {
@@ -158,9 +171,9 @@
 
 .metricBar {
   margin-top: 20px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   border-top: 1px dashed var(--border);
   padding-top: 16px;
 
@@ -206,8 +219,8 @@
 
 .moldDetails {
   margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   font-size: 14px;
   color: var(--ink-muted);
@@ -277,8 +290,9 @@
 
 .doughHeader {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 12px;
   margin-bottom: 12px;
 }
@@ -289,27 +303,15 @@
   right: 12px;
 }
 
-.tableHeader,
 .tableRow {
-  display: grid;
-  grid-template-columns: 1.2fr 0.9fr 0.8fr 0.6fr 0.5fr 0.5fr;
-  gap: 10px;
-  align-items: center;
-}
-
-.tableHeader {
-  grid-column: 1 / -1;
-}
-
-.noPercent {
-  grid-template-columns: 1.4fr 0.9fr 0.8fr 0.6fr 0.8fr 0.2fr;
-}
-
-.tableHeader {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ink-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(122, 75, 42, 0.15);
+  border-radius: 14px;
+  background: var(--surface-strong);
+  box-shadow: t.$shadow-soft;
 }
 
 .tableRow input,
@@ -325,10 +327,40 @@
   min-width: 0;
 }
 
+.cellAction {
+  align-items: stretch;
+  width: 100%;
+}
+
+.cellAction .iconButton {
+  width: 100%;
+  min-width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.cell::before,
+.subField > label {
+  content: attr(data-label);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+}
+
+.subField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .inlineStats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+  justify-content: flex-start;
 }
 
 .statRow {
@@ -346,10 +378,6 @@
   font-size: 12px;
   color: var(--ink-muted);
   white-space: nowrap;
-
-  @media (min-width: 720px) {
-    display: none;
-  }
 }
 
 .unitStack {
@@ -368,15 +396,16 @@
 
 .percentCell,
 .totalCell {
-  font-size: 14px;
-  color: var(--ink);
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--ink-muted);
 }
 
 .totalNote {
   display: block;
   font-size: 12px;
   color: var(--ink-muted);
-  margin-top: 4px;
 }
 
 .totalCell {
@@ -398,28 +427,12 @@
   font-size: 16px;
 }
 
-@media (min-width: 721px) {
-  .iconButton[aria-label="Remove ingredient"] {
-    position: relative;
-    font-size: 0;
-    width: 34px;
-    height: 34px;
-  }
-
-  .iconButton[aria-label="Remove ingredient"]::before {
-    content: "×";
-    font-size: 18px;
-    line-height: 1;
-    color: currentColor;
-  }
-}
-
-
 .ingredientsFooter {
   margin-top: 16px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   color: var(--ink-muted);
   font-size: 13px;
@@ -438,10 +451,16 @@
 
 .recapHeader,
 .recapRow {
-  display: grid;
-  grid-template-columns: 1.2fr 0.6fr 0.6fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: center;
+}
+
+.recapHeader > *,
+.recapRow > * {
+  flex: 1 1 140px;
+  min-width: 0;
 }
 
 .recapHeader {
@@ -517,12 +536,12 @@
 
 .footer {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   gap: 12px;
 }
 
 .mobileStickySave {
-  display: none;
+  display: block;
   position: fixed;
   left: 16px;
   right: 16px;
@@ -549,122 +568,173 @@
   }
 }
 
-@media (max-width: 960px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .headerActions {
-    width: 100%;
-    justify-content: flex-start;
+@media (min-width: 720px) {
+  .gridTwo,
+  .gridThree {
+    flex-direction: row;
     flex-wrap: wrap;
   }
 
-  .tableHeader,
+  .gridTwo > *,
+  .gridThree > * {
+    flex: 1 1 220px;
+  }
+
+  .gridThree {
+    align-items: flex-end;
+  }
+
+  .metricBar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .metricBar > * {
+    flex: 1 1 180px;
+  }
+
+  .moldDetails {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .moldDetails > * {
+    flex: 1 1 220px;
+  }
+
   .tableRow {
-    grid-template-columns: 1fr 0.8fr 0.7fr 0.6fr 0.6fr;
-  }
-
-  .noPercent {
-    grid-template-columns: 1fr 0.8fr 0.7fr 0.6fr;
-  }
-
-  .doughHeader {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start;
   }
 
-  .tableHeader {
-    span:nth-child(6),
-    span:nth-child(7) {
-      display: none;
-    }
+  .tableRow > * {
+    flex: 1 1 100%;
+    min-width: 0;
   }
 
-  .tableRow {
-    span:nth-child(6),
-    button:nth-child(7) {
-      display: none;
-    }
+  .recapHeader,
+  .recapRow {
+    flex-wrap: nowrap;
+  }
+
+  .recapHeader > :nth-child(1),
+  .recapRow > :nth-child(1) {
+    flex: 1.2 1 0;
+    min-width: 0;
+  }
+
+  .recapHeader > :nth-child(2),
+  .recapRow > :nth-child(2) {
+    flex: 0.6 1 0;
+    min-width: 0;
+  }
+
+  .recapHeader > :nth-child(3),
+  .recapRow > :nth-child(3) {
+    flex: 0.6 1 0;
+    min-width: 0;
   }
 }
 
-@media (max-width: 720px) {
+@media (min-width: 900px) {
+  .tableRow > .cell {
+    flex: 1 1 calc(50% - 12px);
+  }
+
+  .tableRow > .cellAction {
+    flex: 1 1 100%;
+  }
+}
+
+@media (min-width: 720px) {
   .form {
     padding: 0;
-    gap: 20px;
+    gap: 28px;
   }
 
   .card {
-    padding: 18px;
+    padding: 24px;
   }
 
-  .headerActions,
-  .footer {
-    flex-direction: column;
-    align-items: stretch;
+  .headerActions {
+    flex-direction: row;
+    width: auto;
+    align-items: center;
   }
 
   .primaryButton,
   .secondaryButton,
   .ghostButton {
-    width: 100%;
+    width: auto;
     text-align: center;
   }
 
   .ingredientsFooter {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
   }
 
   .switchGroup {
-    width: 100%;
-    justify-content: flex-start;
+    width: auto;
+    justify-content: flex-end;
   }
 
   .mobileStickySave {
-    display: block;
-  }
-
-  .field textarea {
-    margin-bottom: 8px;
-  }
-
-  .tableHeader {
     display: none;
   }
 
-  .tableRow {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 12px;
-    border: 1px solid rgba(122, 75, 42, 0.15);
-    border-radius: 14px;
-    background: var(--surface-strong);
-    box-shadow: t.$shadow-soft;
-  }
-
-  .noPercent {
-    grid-template-columns: 1fr;
-  }
-
-  .cell::before {
-    content: attr(data-label);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--ink-muted);
+  .field textarea {
+    margin-bottom: 0;
   }
 
   .cellAction {
-    align-items: stretch;
+    align-items: flex-start;
   }
 
   .cellAction .iconButton {
-    width: 100%;
-    height: 40px;
-    border-radius: 12px;
-    font-weight: 600;
+    width: auto;
+    min-width: 0;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+  }
+}
+
+@media (min-width: 961px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .headerActions {
+    flex-wrap: nowrap;
+  }
+
+  .doughHeader {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tableRow {
+    gap: 16px;
+  }
+
+  .tableRow > .cell[data-label="Stats"] {
+    flex: 1 1 calc(50% - 12px);
+  }
+
+  .tableRow > .cellAction {
+    flex: 0 0 auto;
+    align-self: flex-end;
+  }
+
+  .cellAction .iconButton {
+    width: auto;
+    padding: 0 14px;
+    border-radius: 999px;
   }
 }

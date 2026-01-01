@@ -18,7 +18,7 @@ $header-shadow: t.$shadow-header;
 .inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 16px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,8 +39,8 @@ $header-shadow: t.$shadow-header;
   justify-content: flex-start;
 
   img {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -54,44 +54,44 @@ $header-shadow: t.$shadow-header;
 
 .backButton {
   @include m.pill-button(transparent, var(--ink), 1px solid var(--border));
-  padding: 10px 16px;
+  padding: 8px 10px;
+  font-size: 12px;
 }
 
 .hint {
   font-size: 12px;
   color: var(--ink-muted);
+  display: none;
 }
 
 .brand {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--ink);
   white-space: nowrap;
 }
 
-@media (max-width: 720px) {
+@media (min-width: 720px) {
   .inner {
-    justify-content: space-between;
-    padding: 10px 12px;
+    padding: 12px 16px;
   }
 
   .logoWrap {
     img {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
     }
   }
 
   .backButton {
-    padding: 8px 10px;
-    font-size: 12px;
+    padding: 10px 16px;
   }
 
   .hint {
-    display: none;
+    display: block;
   }
 
   .brand {
-    font-size: 16px;
+    font-size: 18px;
   }
 }

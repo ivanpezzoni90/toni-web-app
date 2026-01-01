@@ -2,7 +2,7 @@
 @use "../../styles/tokens" as t;
 
 .page {
-  padding: 48px clamp(20px, 6vw, 72px) 80px;
+  padding: 32px 16px 60px;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -25,6 +25,7 @@
 
 .listSection {
   @include m.card-surface(20px, t.$shadow-soft);
+  padding: 18px;
 }
 
 .listSection h2 {
@@ -33,9 +34,14 @@
 }
 
 .list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+}
+
+.list > * {
+  flex: 1 1 200px;
+  min-width: 0;
 }
 
 .listItem {
@@ -62,12 +68,12 @@
   font-size: 14px;
 }
 
-@media (max-width: 720px) {
+@media (min-width: 720px) {
   .page {
-    padding: 32px 16px 60px;
+    padding: 48px clamp(20px, 6vw, 72px) 80px;
   }
 
   .listSection {
-    padding: 18px;
+    padding: 20px;
   }
 }

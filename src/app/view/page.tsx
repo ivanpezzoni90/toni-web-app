@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { findRecipeByIdentifier, loadRecipes } from "@lib/storage";
 import type { Ingredient, Recipe } from "@lib/types";
@@ -62,7 +62,7 @@ function buildTotals(
   return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export default function ViewRecipePage() {
+function ViewRecipeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -152,27 +152,6 @@ export default function ViewRecipePage() {
           <h1>Review the recipe and prep your shopping list.</h1>
         </div>
       </header>
-
-      {/* <section className={styles.listSection}>
-        <h2>Recipe list</h2>
-        {sortedRecipes.length === 0 ? (
-          <p className={styles.empty}>No recipes yet. Create one first.</p>
-        ) : (
-          <div className={styles.list}>
-            {sortedRecipes.map((recipe) => (
-              <button
-                key={recipe.id}
-                type="button"
-                className={styles.listItem}
-                onClick={() => handleSelect(recipe)}
-              >
-                <span>{recipe.name}</span>
-                <em>{recipe.category}</em>
-              </button>
-            ))}
-          </div>
-        )}
-      </section> */}
 
       {searchParams.get("recipe") && !activeRecipe ? (
         <div className={styles.notFound}>
@@ -458,5 +437,13 @@ export default function ViewRecipePage() {
         onClose={() => setShowMoldHelper(false)}
       />
     </div>
+  );
+}
+
+export default function ViewRecipePage() {
+  return (
+    <Suspense fallback={<div className={styles.page} />}>
+      <ViewRecipeContent />
+    </Suspense>
   );
 }

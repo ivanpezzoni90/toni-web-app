@@ -11,6 +11,9 @@ export default function GlobalHeader() {
 
   const isEditor = pathname.startsWith("/new") || pathname.startsWith("/edit");
   const hint = isEditor ? "Unsaved changes will be lost" : null;
+  const actionLabel = pathname.startsWith("/new")
+    ? "Create recipe"
+    : "Update recipe";
 
   const handleBack = () => {
     if (isEditor) {
@@ -32,9 +35,24 @@ export default function GlobalHeader() {
             {hint ? <span className={styles.hint}>{hint}</span> : null}
           </div>
         </div>
-        <button type="button" className={styles.backButton} onClick={handleBack}>
-          Back to recipes
-        </button>
+        <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.backButton}
+            onClick={handleBack}
+          >
+            Back to recipes
+          </button>
+          {isEditor ? (
+            <button
+              className={styles.saveButton}
+              form="recipe-form"
+              type="submit"
+            >
+              {actionLabel}
+            </button>
+          ) : null}
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import MoldHelperModal from "@components/MoldHelperModal";
+import Select from "@components/Select";
 import { makeId, slugify } from "@lib/slug";
 import { formatNumber, fromUnit, toUnit, unitOptions } from "@lib/units";
 import type {
@@ -491,7 +492,11 @@ export default function RecipeForm({
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form
+      className={styles.form}
+      id="recipe-form"
+      onSubmit={handleSubmit}
+    >
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>
@@ -522,18 +527,14 @@ export default function RecipeForm({
           </label>
           <label className={styles.field}>
             <span>Category</span>
-            <select
+            <Select
               value={category}
-              onChange={(event) =>
-                setCategory(event.target.value as Recipe["category"])
-              }
-            >
-              {categoryOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              options={categoryOptions.map((option) => ({
+                value: option,
+                label: option,
+              }))}
+              onChange={(next) => setCategory(next as Recipe["category"])}
+            />
           </label>
           <label className={styles.field}>
             <span>Pieces</span>
@@ -606,7 +607,7 @@ export default function RecipeForm({
           </div>
           <button
             type="button"
-            className={styles.secondaryButton}
+            className={`${styles.secondaryButton} ${styles.cardHeaderAction}`}
             onClick={handleAddStarter}
           >
             Add starter
@@ -684,11 +685,14 @@ export default function RecipeForm({
                           />
                         </div>
                         <div className={styles.cell} data-label="Group">
-                          <select
+                          <Select
                             value={ingredient.group}
-                            onChange={(event) => {
-                              const nextGroup =
-                                event.target.value as IngredientGroup;
+                            options={ingredientGroups.map((group) => ({
+                              value: group,
+                              label: group,
+                            }))}
+                            onChange={(next) => {
+                              const nextGroup = next as IngredientGroup;
                               const nextUnit = defaultUnitForGroup(nextGroup);
                               handleStarterUpdate(starter.id, ingredient.id, {
                                 group: nextGroup,
@@ -699,13 +703,7 @@ export default function RecipeForm({
                                     : undefined,
                               });
                             }}
-                          >
-                            {ingredientGroups.map((group) => (
-                              <option key={group} value={group}>
-                                {group}
-                              </option>
-                            ))}
-                          </select>
+                          />
                         </div>
                         <div className={styles.cell} data-label="Quantity">
                           <input
@@ -724,21 +722,18 @@ export default function RecipeForm({
                         </div>
                         <div className={styles.cell} data-label="Unit">
                           <div className={styles.unitStack}>
-                            <select
+                            <Select
                               value={ingredient.unit}
-                              onChange={(event) =>
+                              options={unitOptions.map((option) => ({
+                                value: option.value,
+                                label: option.label,
+                              }))}
+                              onChange={(next) =>
                                 handleStarterUpdate(starter.id, ingredient.id, {
-                                  unit: event.target
-                                    .value as Ingredient["unit"],
+                                  unit: next as Ingredient["unit"],
                                 })
                               }
-                            >
-                              {unitOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                  {option.label}
-                                </option>
-                              ))}
-                            </select>
+                            />
                             {ingredient.unit === "qty" ? (
                               <input
                                 type="number"
@@ -777,22 +772,25 @@ export default function RecipeForm({
                               </div>
                             ) : null}
                             <div className={styles.statRow}>
-                              <span className={styles.statLabel}>Total</span>
                               <span className={styles.totalCell}>
-                                {formatNumber(
-                                  toUnit(totalValue, ingredient.unit),
-                                  ingredient.unit === "g" ||
-                                    ingredient.unit === "qty"
-                                    ? 0
-                                    : 2
+                                {ingredient.unit === "qty" ? (
+                                  <>
+                                    {formatNumber(totalValue, 0)} {ingredient.unit}
+                                    {totalGrams !== null ? (
+                                      <span className={styles.totalNote}>
+                                        ({formatNumber(totalGrams, 0)} g)
+                                      </span>
+                                    ) : null}
+                                  </>
+                                ) : (
+                                  <>
+                                    {formatNumber(
+                                      toUnit(totalValue, ingredient.unit),
+                                      ingredient.unit === "g" ? 0 : 2
+                                    )}{" "}
+                                    {ingredient.unit}
+                                  </>
                                 )}
-                                <em>{ingredient.unit}</em>
-                                {ingredient.unit === "qty" &&
-                                totalGrams !== null ? (
-                                  <span className={styles.totalNote}>
-                                    ≈ {formatNumber(totalGrams, 0)} g
-                                  </span>
-                                ) : null}
                               </span>
                             </div>
                           </div>
@@ -800,7 +798,7 @@ export default function RecipeForm({
                         <div className={`${styles.cell} ${styles.cellAction}`}>
                           <button
                             type="button"
-                            className={styles.iconButton}
+                            className={styles.rowAction}
                             onClick={() =>
                               handleRemoveStarterIngredient(
                                 starter.id,
@@ -829,13 +827,15 @@ export default function RecipeForm({
             ))}
           </div>
         )}
-        <button
-          type="button"
-          className={styles.secondaryButton}
-          onClick={handleAddStarter}
-        >
-          Add starter
-        </button>
+        <div className={styles.cardActionRow}>
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={handleAddStarter}
+          >
+            Add starter
+          </button>
+        </div>
       </section>
 
       <section className={styles.card}>
@@ -924,11 +924,14 @@ export default function RecipeForm({
                         />
                       </div>
                       <div className={styles.cell} data-label="Group">
-                        <select
+                        <Select
                           value={ingredient.group}
-                          onChange={(event) => {
-                            const nextGroup =
-                              event.target.value as IngredientGroup;
+                          options={ingredientGroups.map((group) => ({
+                            value: group,
+                            label: group,
+                          }))}
+                          onChange={(next) => {
+                            const nextGroup = next as IngredientGroup;
                             const nextUnit = defaultUnitForGroup(nextGroup);
                             handleIngredientUpdate(dough.id, ingredient.id, {
                               group: nextGroup,
@@ -939,13 +942,7 @@ export default function RecipeForm({
                                   : undefined,
                             });
                           }}
-                        >
-                          {ingredientGroups.map((group) => (
-                            <option key={group} value={group}>
-                              {group}
-                            </option>
-                          ))}
-                        </select>
+                        />
                       </div>
                       <div className={styles.cell} data-label="Quantity">
                         <input
@@ -964,20 +961,18 @@ export default function RecipeForm({
                       </div>
                       <div className={styles.cell} data-label="Unit">
                         <div className={styles.unitStack}>
-                          <select
+                          <Select
                             value={ingredient.unit}
-                            onChange={(event) =>
+                            options={unitOptions.map((option) => ({
+                              value: option.value,
+                              label: option.label,
+                            }))}
+                            onChange={(next) =>
                               handleIngredientUpdate(dough.id, ingredient.id, {
-                                unit: event.target.value as Ingredient["unit"],
+                                unit: next as Ingredient["unit"],
                               })
                             }
-                          >
-                            {unitOptions.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
+                          />
                           {ingredient.unit === "qty" ? (
                             <div className={styles.subField}>
                               <label>weight per piece</label>
@@ -1020,29 +1015,33 @@ export default function RecipeForm({
                           ) : null}
                           <div className={styles.statRow}>
                             <span className={styles.statLabel}>Total</span>
-                            <span className={styles.totalCell}>
-                              {formatNumber(
-                                toUnit(totalValue, ingredient.unit),
-                                ingredient.unit === "g" ||
-                                  ingredient.unit === "qty"
-                                  ? 0
-                                  : 2
-                              )}
-                              <em>{ingredient.unit}</em>
-                              {ingredient.unit === "qty" &&
-                              totalGrams !== null ? (
-                                <span className={styles.totalNote}>
-                                  ≈ {formatNumber(totalGrams, 0)} g
-                                </span>
-                              ) : null}
-                            </span>
+                              <span className={styles.totalCell}>
+                                {ingredient.unit === "qty" ? (
+                                  <>
+                                    {formatNumber(totalValue, 0)} {ingredient.unit}
+                                    {totalGrams !== null ? (
+                                      <span className={styles.totalNote}>
+                                        ({formatNumber(totalGrams, 0)} g)
+                                      </span>
+                                    ) : null}
+                                  </>
+                                ) : (
+                                  <>
+                                    {formatNumber(
+                                      toUnit(totalValue, ingredient.unit),
+                                      ingredient.unit === "g" ? 0 : 2
+                                    )}{" "}
+                                    {ingredient.unit}
+                                  </>
+                                )}
+                              </span>
                           </div>
                         </div>
                       </div>
                       <div className={`${styles.cell} ${styles.cellAction}`}>
                         <button
                           type="button"
-                          className={styles.iconButton}
+                          className={styles.rowAction}
                           onClick={() =>
                             handleRemoveIngredient(dough.id, ingredient.id)
                           }
@@ -1068,13 +1067,15 @@ export default function RecipeForm({
           ))}
         </div>
         {multipleDoughs ? (
-          <button
-            type="button"
-            className={styles.secondaryButton}
-            onClick={handleAddDough}
-          >
-            Add dough
-          </button>
+          <div className={styles.cardActionRow}>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={handleAddDough}
+            >
+              Add dough
+            </button>
+          </div>
         ) : null}
       </section>
 
@@ -1086,8 +1087,7 @@ export default function RecipeForm({
         <div className={styles.recapTable}>
           <div className={styles.recapHeader}>
             <span>Ingredient</span>
-            <span>Total (g)</span>
-            <span>Total (unit)</span>
+            <span>Total</span>
           </div>
           {ingredientTotals.length === 0 ? (
             <p className={styles.recapEmpty}>Add ingredients to see totals.</p>
@@ -1104,15 +1104,25 @@ export default function RecipeForm({
                 <div className={styles.recapRow} key={item.name}>
                   <span>{item.name}</span>
                   <span>
-                    {totalGrams === null ? "—" : formatNumber(totalGrams, 0)}
-                  </span>
-                  <span>
-                    {isQty
-                      ? `${formatNumber(item.total_qty, 0)} ${unit}`
-                      : `${formatNumber(
-                          toUnit(totalGrams ?? 0, unit),
-                          unit === "g" ? 0 : 2
-                        )} ${unit}`}
+                    {isQty ? (
+                      <>
+                        {formatNumber(item.total_qty, 0)} {unit}
+                        {totalGrams !== null ? (
+                          <span className={styles.totalNote}>
+                            ({formatNumber(totalGrams, 0)} g)
+                          </span>
+                        ) : null}
+                      </>
+                    ) : (
+                      <>
+                        {totalGrams === null
+                          ? "—"
+                          : `${formatNumber(
+                              toUnit(totalGrams, unit),
+                              unit === "g" ? 0 : 2
+                            )} ${unit}`}
+                      </>
+                    )}
                   </span>
                 </div>
               );
@@ -1254,13 +1264,15 @@ export default function RecipeForm({
             </div>
           ))}
         </div>
-        <button
-          type="button"
-          className={styles.secondaryButton}
-          onClick={() => setSteps((items) => [...items, createStep()])}
-        >
-          Add step
-        </button>
+        <div className={styles.cardActionRow}>
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => setSteps((items) => [...items, createStep()])}
+          >
+            Add step
+          </button>
+        </div>
       </section>
 
       <footer className={styles.footer}>

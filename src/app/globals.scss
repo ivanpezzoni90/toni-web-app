@@ -11,6 +11,13 @@
   --surface: rgba(255, 255, 255, 0.86);
   --surface-strong: rgba(255, 255, 255, 0.96);
   --border: rgba(122, 75, 42, 0.18);
+  --field-bg: var(--surface-strong);
+  --field-border: rgba(122, 75, 42, 0.25);
+  --field-border-focus: var(--butter);
+  --field-text: var(--ink);
+  --field-placeholder: rgba(94, 79, 69, 0.6);
+  --focus-ring: rgba(244, 208, 125, 0.35);
+  --field-height: 45px;
   --font-display: "Playfair Display", serif;
   --font-text: "Manrope", sans-serif;
 
@@ -189,4 +196,65 @@ a {
 
 button {
   font-family: inherit;
+}
+
+input[type="text"],
+input:not([type]),
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+  font: inherit;
+  color: var(--field-text);
+  background-color: var(--field-bg);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-field);
+  padding: var(--space-3) var(--space-4);
+  min-height: var(--field-height);
+  transition: border-color 160ms ease, box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+input[type="text"]::placeholder,
+input:not([type])::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="search"]::placeholder,
+input[type="url"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+  color: var(--field-placeholder);
+}
+
+input[type="text"]:focus,
+input:not([type]):focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2320180F' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  background-size: 12px 8px;
+  padding-right: calc(var(--space-5) + 12px);
+}
+
+select::-ms-expand {
+  display: none;
 }

@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { moldPresets } from "@lib/molds";
 import type { Recipe } from "@lib/types";
 import { sizeKey, sizeLabel } from "@lib/moldHelpers";
+import Select from "@components/Select";
 import styles from "./MoldHelperModal.module.scss";
 
 type MoldHelperModalProps = {
@@ -68,41 +69,38 @@ export default function MoldHelperModal({
         <div className={styles.gridThree}>
           <label className={styles.field}>
             <span>Product type</span>
-            <select
+            <Select
               value={selection?.product_type ?? ""}
-              onChange={(event) =>
+              options={[
+                { value: "", label: "Select product" },
+                ...productTypes.map((type) => ({ value: type, label: type })),
+              ]}
+              onChange={(next) =>
                 onSelectionChange({
-                  product_type: event.target.value,
+                  product_type: next,
                   mold_rating: "",
                 })
               }
-            >
-              <option value="">Select product</option>
-              {productTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
+            />
           </label>
           <label className={styles.field}>
             <span>Size (H × Ø or W × L)</span>
-            <select
+            <Select
               value={selection?.mold_rating ?? ""}
-              onChange={(event) =>
+              options={[
+                { value: "", label: "Select size" },
+                ...sizeOptions.map((option) => ({
+                  value: option.value,
+                  label: option.label,
+                })),
+              ]}
+              onChange={(next) =>
                 onSelectionChange({
                   product_type: selection?.product_type ?? "",
-                  mold_rating: event.target.value,
+                  mold_rating: next,
                 })
               }
-            >
-              <option value="">Select size</option>
-              {sizeOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            />
           </label>
           {selectedPreset ? (
             <div className={styles.moldDetails}>

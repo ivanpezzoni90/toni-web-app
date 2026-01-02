@@ -52,6 +52,12 @@ $header-shadow: t.$shadow-header;
   min-width: 0;
 }
 
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .backButton {
   @include m.pill-button(
     var(--btn-ghost-bg),
@@ -60,8 +66,14 @@ $header-shadow: t.$shadow-header;
   );
   --btn-hover-bg: var(--btn-ghost-hover-bg);
   --btn-hover-text: var(--btn-ghost-text);
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--type-caption-size);
+  min-height: var(--field-height);
+}
+
+.saveButton {
+  @include m.pill-button(var(--btn-primary-bg), var(--btn-primary-text));
+  --btn-hover-bg: var(--btn-primary-hover-bg);
+  --btn-hover-text: var(--btn-primary-text);
+  min-height: var(--field-height);
 }
 
 .hint {

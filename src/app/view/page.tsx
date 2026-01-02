@@ -6,6 +6,7 @@ import { findRecipeByIdentifier, loadRecipes } from "@lib/storage";
 import type { Ingredient, Recipe } from "@lib/types";
 import { formatNumber, toUnit } from "@lib/units";
 import MoldHelperModal from "@components/MoldHelperModal";
+import Select from "@components/Select";
 import { normalizeMoldSelection } from "@lib/moldHelpers";
 import styles from "./page.module.scss";
 
@@ -214,19 +215,17 @@ export default function ViewRecipePage() {
                 {activeRecipe.starters && activeRecipe.starters.length > 0 ? (
                   <label>
                     <span>Starter</span>
-                    <select
+                    <Select
                       value={selectedStarterId}
-                      onChange={(event) =>
-                        setSelectedStarterId(event.target.value)
-                      }
-                    >
-                      <option value="">No starter</option>
-                      {activeRecipe.starters.map((starter) => (
-                        <option key={starter.id} value={starter.id}>
-                          {starter.name}
-                        </option>
-                      ))}
-                    </select>
+                      options={[
+                        { value: "", label: "No starter" },
+                        ...activeRecipe.starters.map((starter) => ({
+                          value: starter.id,
+                          label: starter.name,
+                        })),
+                      ]}
+                      onChange={(next) => setSelectedStarterId(next)}
+                    />
                   </label>
                 ) : null}
                 <label>

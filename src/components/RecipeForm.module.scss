@@ -39,14 +39,6 @@
   color: var(--ink-muted);
 }
 
-.headerActions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  width: 100%;
-  align-items: stretch;
-}
-
 .primaryButton {
   @include m.pill-button(
     var(--btn-primary-bg),
@@ -92,6 +84,9 @@
 .card {
   @include m.card-surface();
   padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
 }
 
 .cardHeader {
@@ -100,7 +95,6 @@
   justify-content: space-between;
   gap: var(--space-4);
   align-items: center;
-  margin-bottom: var(--space-5);
 
   @media (min-width: t.$bp-sm) {
     align-items: flex-start;
@@ -133,6 +127,15 @@
   p {
     color: var(--ink-muted);
   }
+}
+
+.cardActionRow {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cardHeaderAction {
+  align-self: flex-start;
 }
 
 .switchGroup {
@@ -272,7 +275,7 @@
 }
 
 .switchOn {
-  background: var(--sage);
+  background: var(--butter);
   justify-content: flex-end;
 }
 
@@ -304,7 +307,6 @@
   background: rgba(255, 255, 255, 0.7);
   box-shadow: t.$shadow-soft;
   position: relative;
-  margin-bottom: var(--space-5);
 
   @media (min-width: t.$bp-sm) {
     display: flex;
@@ -342,10 +344,7 @@
 .tableRow input,
 .tableRow select {
   width: 100%;
-  @include m.input-field(
-    var(--space-2) var(--space-3),
-    var(--radius-sm)
-  );
+  @include m.input-field(var(--space-2) var(--space-3), var(--radius-sm));
 }
 
 .cell {
@@ -367,6 +366,17 @@
   padding: 0 var(--space-4);
   border-radius: var(--radius-sm);
   font-weight: var(--btn-font-weight);
+}
+
+.rowAction {
+  @include m.pill-button(
+    var(--btn-ghost-bg),
+    var(--btn-ghost-text),
+    1px solid var(--btn-ghost-border)
+  );
+  --btn-hover-bg: var(--btn-ghost-hover-bg);
+  --btn-hover-text: var(--btn-ghost-text);
+  width: 100%;
 }
 
 .cell::before,
@@ -490,6 +500,16 @@
 .recapRow > * {
   flex: 1 1 var(--layout-recap-min);
   min-width: 0;
+}
+
+.recapHeader > :nth-child(1),
+.recapRow > :nth-child(1) {
+  flex: 1.4 1 0;
+}
+
+.recapHeader > :nth-child(2),
+.recapRow > :nth-child(2) {
+  flex: 0.8 1 0;
 }
 
 .recapHeader {
@@ -667,9 +687,9 @@
 }
 
 @media (min-width: t.$bp-md) {
-.tableRow > .cell {
-  flex: 1 1 calc(50% - var(--space-3));
-}
+  .tableRow > .cell {
+    flex: 1 1 calc(50% - var(--space-3));
+  }
 
   .tableRow > .cellAction {
     flex: 1 1 100%;
@@ -686,12 +706,6 @@
     padding: var(--space-6);
   }
 
-  .headerActions {
-    flex-direction: row;
-    width: auto;
-    align-items: center;
-  }
-
   .primaryButton,
   .secondaryButton,
   .ghostButton {
@@ -702,6 +716,7 @@
   .ingredientsFooter {
     flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
   }
 
   .switchGroup {
@@ -713,12 +728,16 @@
     display: none;
   }
 
+  .footer {
+    display: none;
+  }
+
   .field textarea {
     margin-bottom: 0;
   }
 
   .cellAction {
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
   .cellAction .iconButton {
@@ -727,6 +746,27 @@
     height: calc(var(--size-icon-md) - var(--space-1));
     padding: 0 var(--space-3-5);
     border-radius: var(--radius-pill);
+  }
+
+  .cellAction .rowAction {
+    width: auto;
+  }
+
+  .card > .secondaryButton {
+    align-self: flex-end;
+  }
+
+  .cardHeaderRow > .secondaryButton {
+    margin-left: auto;
+  }
+
+  .cardActionRow {
+    justify-content: flex-end;
+  }
+
+  .cardHeaderAction {
+    align-self: flex-end;
+    margin-left: auto;
   }
 }
 

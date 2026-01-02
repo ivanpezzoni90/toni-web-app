@@ -2,138 +2,145 @@
 @use "../../styles/tokens" as t;
 
 .page {
-  padding: 32px 16px 110px;
-  max-width: 1200px;
+  padding: var(--space-6) var(--space-4) 110px;
+  max-width: var(--layout-max);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 .header h1 {
-  font-family: var(--font-display);
+  font-family: var(--type-h1-font);
   font-size: clamp(32px, 4vw, 48px);
-  margin: 8px 0;
+  line-height: var(--type-h1-line);
+  letter-spacing: var(--type-h1-letter);
+  margin: var(--space-2) 0;
 }
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 12px;
+  letter-spacing: var(--type-caption-letter);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
   color: var(--ink-muted);
 }
 
 .listSection {
-  @include m.card-surface(20px, t.$shadow-soft);
-  padding: 18px;
+  @include m.card-surface(var(--space-4), t.$shadow-soft);
 
   h2 {
-    font-family: var(--font-display);
-    margin-bottom: 12px;
+    font-family: var(--type-h2-font);
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-line);
+    letter-spacing: var(--type-h2-letter);
+    margin-bottom: var(--space-3);
   }
 }
 
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .list > * {
-  flex: 1 1 200px;
+  flex: 1 1 var(--layout-card-min);
   min-width: 0;
 }
 
 .listItem {
   border: 1px solid rgba(122, 75, 42, 0.2);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: var(--surface-strong);
-  padding: 12px 16px;
+  padding: var(--space-3) var(--space-4);
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: var(--btn-font-weight);
 
   em {
     font-style: normal;
     color: var(--ink-muted);
-    font-size: 12px;
+    font-size: var(--type-caption-size);
   }
 }
 
 .empty,
 .notFound {
   color: var(--ink-muted);
-  font-size: 14px;
+  font-size: var(--type-body-sm-size);
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 .heroCard {
-  @include m.card-surface(24px, t.$shadow-card);
-  border-radius: 26px;
+  @include m.card-surface(var(--space-6), t.$shadow-card);
+  border-radius: var(--radius-xl);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 18px;
+  gap: var(--space-4);
+  padding: var(--space-4);
 }
 
 .category {
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 12px;
+  letter-spacing: var(--type-caption-letter);
+  font-size: var(--type-caption-size);
   color: var(--cacao);
 }
 
 .heroCard h2 {
-  font-family: var(--font-display);
+  font-family: var(--type-h2-font);
   font-size: clamp(28px, 3vw, 40px);
-  margin-top: 8px;
+  line-height: var(--type-h2-line);
+  letter-spacing: var(--type-h2-letter);
+  margin-top: var(--space-2);
 }
 
 .meta {
   color: var(--ink-muted);
-  margin-top: 6px;
+  margin-top: var(--space-2);
 }
 
 .stats {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-3);
   text-align: left;
 }
 
 .stats span {
   color: var(--ink-muted);
-  font-size: 12px;
-  padding-right: 8px;
+  font-size: var(--type-caption-size);
+  padding-right: var(--space-2);
 }
 
 .stats strong {
-  font-family: var(--font-display);
-  font-size: 22px;
+  font-family: var(--type-h3-font);
+  font-size: var(--type-h2-size);
 }
 
 .scaleCard {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  gap: var(--space-6);
   background: rgba(244, 208, 125, 0.3);
-  border-radius: 22px;
-  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
   border: 1px solid rgba(122, 75, 42, 0.2);
   box-shadow: t.$shadow-soft;
 }
 
 .scaleCard h3 {
-  font-family: var(--font-display);
-  margin-bottom: 6px;
+  font-family: var(--type-h3-font);
+  margin-bottom: var(--space-2);
 }
 
 .scaleCard p {
@@ -142,7 +149,7 @@
 
 .scaleInputs {
   display: flex;
-  gap: 16px;
+  gap: var(--space-4);
   align-items: stretch;
   flex-wrap: wrap;
   width: 100%;
@@ -152,7 +159,7 @@
 .scaleControls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-3);
   align-items: flex-start;
   width: 100%;
 }
@@ -160,67 +167,70 @@
 .scaleInputs label {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 12px;
+  gap: var(--space-2);
+  font-size: var(--type-caption-size);
   color: var(--ink-muted);
 }
 
 .helperPrompt {
-  margin-top: 8px;
+  margin-top: var(--space-2);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 14px;
+  gap: var(--space-2);
+  font-size: var(--type-body-sm-size);
   color: var(--ink-muted);
 }
 
 .helperCta {
   align-self: flex-start;
-  @include m.pill-button(var(--butter), var(--ink));
-  padding: 8px 14px;
+  @include m.pill-button(var(--btn-secondary-bg), var(--btn-secondary-text));
+  --btn-hover-bg: var(--btn-secondary-hover-bg);
+  --btn-hover-text: var(--btn-secondary-text);
+  padding: var(--space-2) var(--space-4);
 }
 
 .scaleInputs input {
-  @include m.input-field(10px 12px, t.$radius-field);
-  min-width: 140px;
+  @include m.input-field(var(--space-2) var(--space-3), var(--radius-sm));
+  min-width: var(--layout-input-min);
   width: 100%;
 }
 
 .scaleInputs select {
-  @include m.input-field(10px 12px, t.$radius-field);
-  min-width: 140px;
+  @include m.input-field(var(--space-2) var(--space-3), var(--radius-sm));
+  min-width: var(--layout-input-min);
   width: 100%;
 }
 
 .scaleNote {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  font-size: 11px;
+  gap: var(--space-1);
+  font-size: var(--type-caption-size);
   color: var(--ink-muted);
 }
 
 .scaleNote strong {
-  font-family: var(--font-display);
-  font-size: 16px;
+  font-family: var(--type-h3-font);
+  font-size: var(--type-body-size);
   color: var(--ink);
 }
 
 .card {
-  @include m.card-surface(22px, t.$shadow-card);
-  padding: 18px;
+  @include m.card-surface(var(--space-5), t.$shadow-card);
 }
 
 .cardHeader {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
 
   h3 {
-    font-family: var(--font-display);
-    font-size: 22px;
+    font-family: var(--type-h3-font);
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-line);
+    letter-spacing: var(--type-h2-letter);
   }
 
   p {
@@ -231,63 +241,63 @@
 .recap {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .recapRow {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-3);
   align-items: center;
-  padding: 12px 14px;
+  padding: var(--space-3) var(--space-4);
   background: var(--surface-strong);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   box-shadow: t.$shadow-soft;
 }
 
 .doughs {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-4);
 }
 
 .doughCard {
   border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
   background: rgba(255, 255, 255, 0.7);
   box-shadow: t.$shadow-soft;
 }
 
 .doughCard h4 {
-  font-family: var(--font-display);
-  margin-bottom: 8px;
+  font-family: var(--type-h4-font);
+  margin-bottom: var(--space-2);
 }
 
 .starterDescription {
   color: var(--ink-muted);
-  font-size: 14px;
-  margin-bottom: 10px;
+  font-size: var(--type-body-sm-size);
+  margin-bottom: var(--space-3);
 }
 
 .doughList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .doughRow {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-3);
   align-items: center;
-  font-size: 14px;
+  font-size: var(--type-body-sm-size);
   color: var(--ink-muted);
 }
 
 .gramNote {
   color: var(--ink);
-  font-size: 13px;
+  font-size: var(--type-body-sm-size);
 }
 
 .valueRight {
@@ -299,13 +309,13 @@
 .steps {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .stepCard {
   background: var(--surface-strong);
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
   border: 1px solid rgba(122, 75, 42, 0.18);
   box-shadow: t.$shadow-soft;
 }
@@ -314,16 +324,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: var(--type-caption-size);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--ink-muted);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 
 .stepCard h4 {
-  font-size: 18px;
-  margin-bottom: 6px;
+  font-family: var(--type-h4-font);
+  font-size: var(--type-h4-size);
+  line-height: var(--type-h4-line);
+  letter-spacing: var(--type-h4-letter);
+  margin-bottom: var(--space-2);
 }
 
 .stepCard p {
@@ -331,20 +344,20 @@
 }
 
 .stepIngredients {
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: var(--space-3);
+  font-size: var(--type-body-sm-size);
   color: var(--ink-muted);
 
   span {
     display: block;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: var(--type-caption-size);
     letter-spacing: 0.12em;
-    margin-bottom: 4px;
+    margin-bottom: var(--space-1);
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: t.$bp-md) {
   .page {
     padding: 24px clamp(20px, 6vw, 72px) 80px;
   }
@@ -379,17 +392,17 @@
   }
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .heroCard {
-    padding: 24px;
+    padding: var(--space-6);
   }
 
   .card {
-    padding: 22px;
+    padding: var(--space-5);
   }
 
   .listSection {
-    padding: 20px;
+    padding: var(--space-5);
   }
 
   .scaleInputs select {
@@ -400,21 +413,21 @@
 .mobileStickyEdit {
   display: inline-flex;
   position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-4);
   justify-content: center;
   align-items: center;
-  padding: 14px 20px;
-  border-radius: 999px;
-  background: var(--cacao);
-  color: #fff;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   font-weight: 700;
   box-shadow: t.$shadow-cta-strong;
   z-index: 20;
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .mobileStickyEdit {
     display: none;
   }

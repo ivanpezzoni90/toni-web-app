@@ -4,8 +4,8 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 32px 16px 110px;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-4) 110px;
   margin: 0 auto;
   min-height: 100vh;
   position: relative;
@@ -28,7 +28,7 @@
 
 .header {
   width: 100%;
-  gap: 32px;
+  gap: var(--space-6);
   align-items: center;
   color: white;
   padding-inline: 5vw;
@@ -39,13 +39,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-4);
   flex: 1 1 auto;
   min-height: 0;
 
-  @media (min-width: 720px) {
-    padding-top: 3rem;
-    gap: 3rem;
+  @media (min-width: t.$bp-sm) {
+    padding-top: var(--space-7);
+    gap: var(--space-7);
   }
 }
 
@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-3);
   width: 100%;
 }
 
@@ -72,15 +72,17 @@
   justify-content: flex-start;
 
   img {
-    width: 64px;
-    height: 64px;
+    width: var(--size-logo-lg);
+    height: var(--size-logo-lg);
   }
 }
 
 .eyebrow {
+  font-family: var(--type-eyebrow-font);
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 18px;
+  letter-spacing: var(--type-eyebrow-letter);
+  font-size: var(--type-eyebrow-size);
+  line-height: var(--type-eyebrow-line);
   text-align: center;
 }
 
@@ -89,16 +91,20 @@
   color: white;
 
   h1 {
-    font-family: var(--font-display);
+    font-family: var(--type-h1-font);
     font-size: clamp(34px, 4vw, 56px);
-    margin: 12px 0 10px;
+    line-height: var(--type-h1-line);
+    letter-spacing: var(--type-h1-letter);
+    margin: var(--space-3) 0 var(--space-2);
   }
 
   p {
     display: none;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line);
   }
 
-  @media (min-width: 720px) {
+  @media (min-width: t.$bp-sm) {
     p {
       display: block;
     }
@@ -108,14 +114,14 @@
 .recipeList {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--space-4);
   overflow: visible;
   padding-inline: 5vw;
   flex: 1 1 auto;
   min-height: 0;
   min-width: 0;
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--layout-max);
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -123,18 +129,20 @@
 .recipeListHeader {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-4);
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 8px 0;
+  padding: var(--space-2) 0;
   transition: background-color 180ms ease;
 }
 
 .recipeListHeader {
   h2 {
-    font-family: var(--font-display);
-    font-size: 28px;
+    font-family: var(--type-h2-font);
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-line);
+    letter-spacing: var(--type-h2-letter);
     color: white;
   }
 }
@@ -165,46 +173,48 @@
 .filtersGroup {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .filtersOrder {
   display: none;
-  @media (min-width: 720px) {
+  @media (min-width: t.$bp-sm) {
     display: flex;
   }
 }
 
 .createRecipeButton {
   display: none;
-  @media (min-width: 720px) {
+  @media (min-width: t.$bp-sm) {
     display: inline-flex;
     align-self: center;
   }
 }
 
 .filtersLabel {
-  font-size: 12px;
+  font-family: var(--type-caption-font);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: var(--type-caption-letter);
   color: white;
   margin: 0;
-  font-weight: 600;
+  font-weight: var(--btn-font-weight);
 }
 
 .filterButtons {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .filterButton {
-  border-radius: 999px;
-  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-4);
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
-  font-weight: 600;
+  font-weight: var(--btn-font-weight);
   cursor: pointer;
 }
 
@@ -214,7 +224,7 @@
   border-color: transparent;
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .recipeListHeader {
     flex-direction: row;
     align-items: center;
@@ -232,20 +242,20 @@
 .cardGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--space-4);
   min-width: 0;
 }
 
 .cardGrid > * {
-  flex: 1 1 260px;
+  flex: 1 1 var(--layout-card-min-lg);
   min-width: 0;
 }
 
 .recipeCard {
   background: var(--surface-strong);
   border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 20px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -255,22 +265,24 @@
 }
 
 .recipeCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(calc(var(--space-1) * -1));
   box-shadow: t.$shadow-card;
 }
 
 .cardCategory {
   color: var(--cacao);
-  font-size: 12px;
+  font-size: var(--type-caption-size);
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--type-caption-letter);
 }
 
 .recipeCard {
   h3 {
-    font-family: var(--font-display);
-    font-size: 22px;
-    margin: 8px 0;
+    font-family: var(--type-h3-font);
+    font-size: var(--type-h3-size);
+    line-height: var(--type-h3-line);
+    letter-spacing: var(--type-h3-letter);
+    margin: var(--space-2) 0;
   }
 }
 
@@ -280,49 +292,56 @@
 
 .cardActions {
   display: flex;
-  gap: 10px;
-  margin-top: 16px;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
   flex-direction: column;
   align-items: stretch;
 }
 
 .primaryButton {
-  @include m.pill-button(var(--cacao), #fff);
-  padding: 10px 18px;
+  @include m.pill-button(var(--btn-primary-bg), var(--btn-primary-text));
+  --btn-hover-bg: var(--btn-primary-hover-bg);
+  --btn-hover-text: var(--btn-primary-text);
   text-align: center;
   width: 100%;
 }
 
 .secondaryButton {
-  @include m.pill-button(var(--butter), var(--ink));
-  padding: 10px 18px;
+  @include m.pill-button(var(--btn-secondary-bg), var(--btn-secondary-text));
+  --btn-hover-bg: var(--btn-secondary-hover-bg);
+  --btn-hover-text: var(--btn-secondary-text);
 }
 
 .ghostButton {
-  @include m.pill-button(transparent, var(--ink), 1px solid var(--border));
-  padding: 10px 18px;
+  @include m.pill-button(
+    var(--btn-ghost-bg),
+    var(--btn-ghost-text),
+    1px solid var(--btn-ghost-border)
+  );
+  --btn-hover-bg: var(--btn-ghost-hover-bg);
+  --btn-hover-text: var(--btn-ghost-text);
   width: 100%;
 }
 
 .textButton {
-  border-radius: t.$radius-pill;
-  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
   background: transparent;
   color: var(--ink-muted);
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: var(--btn-font-weight);
   width: 100%;
 }
 
 .emptyState {
   background: rgba(255, 255, 255, 0.75);
   border: 1px dashed var(--border);
-  border-radius: 24px;
-  padding: 32px;
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
   align-items: flex-start;
 }
 
@@ -337,7 +356,7 @@
   }
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .page {
     padding: 48px clamp(20px, 6vw, 72px) 80px;
   }
@@ -362,19 +381,19 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: t.$bp-lg) {
   .recipeList {
     padding-inline: 4rem;
   }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: t.$bp-xl) {
   .header {
     padding-inline: 4rem;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: t.$bp-lg) {
   .page {
     background-attachment: fixed;
   }
@@ -383,21 +402,21 @@
 .mobileStickyCreate {
   display: inline-flex;
   position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-4);
   justify-content: center;
   align-items: center;
-  padding: 14px 20px;
-  border-radius: 999px;
-  background: var(--cacao);
-  color: #fff;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   font-weight: 700;
   box-shadow: t.$shadow-cta-strong;
   z-index: 20;
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .mobileStickyCreate {
     display: none;
   }

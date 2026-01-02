@@ -1,9 +1,44 @@
-$shadow-card: 0 16px 30px var(--shadow);
-$shadow-soft: 0 12px 20px rgba(32, 24, 15, 0.08);
-$shadow-header: 0 8px 18px var(--shadow);
-$shadow-cta: 0 12px 24px rgba(122, 75, 42, 0.25);
-$shadow-cta-strong: 0 14px 26px rgba(122, 75, 42, 0.35);
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-3-5: 0.875rem;
+$space-4: 1rem;
+$space-5: 1.5rem;
+$space-5-5: 1.75rem;
+$space-6: 2rem;
+$space-7: 3rem;
+$space-8: 4rem;
+$space-9: 5rem;
+$space-10: 6rem;
 
-$radius-card: 24px;
+$radius-xs: 6px;
+$radius-sm: 10px;
+$radius-md: 14px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+
+$radius-card: var(--radius-card);
 $radius-pill: 999px;
-$radius-field: 12px;
+$radius-field: var(--radius-field);
+
+$shadow-card: var(--shadow-card);
+$shadow-soft: var(--shadow-soft);
+$shadow-header: var(--shadow-header);
+$shadow-cta: var(--shadow-cta);
+$shadow-cta-strong: var(--shadow-cta-strong);
+
+$bp-xs: 480px;
+$bp-sm: 720px;
+$bp-md: 900px;
+$bp-lg: 1200px;
+$bp-xl: 1920px;
+
+$layout-max: var(--layout-max);
+$layout-max-wide: var(--layout-max-wide);
+$layout-modal-max: var(--layout-modal-max);
+$layout-card-min: var(--layout-card-min);
+$layout-card-min-lg: var(--layout-card-min-lg);
+$layout-input-min: var(--layout-input-min);
+$layout-column-min: var(--layout-column-min);
+$layout-stat-min: var(--layout-stat-min);
+$layout-recap-min: var(--layout-recap-min);

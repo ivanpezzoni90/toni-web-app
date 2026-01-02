@@ -2,78 +2,83 @@
 @use "../../styles/tokens" as t;
 
 .page {
-  padding: 32px 16px 60px;
-  max-width: 1200px;
+  padding: var(--space-6) var(--space-4) var(--space-8);
+  max-width: var(--layout-max);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 .header h1 {
-  font-family: var(--font-display);
+  font-family: var(--type-h1-font);
   font-size: clamp(32px, 4vw, 48px);
-  margin: 8px 0;
+  line-height: var(--type-h1-line);
+  letter-spacing: var(--type-h1-letter);
+  margin: var(--space-2) 0;
 }
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 12px;
+  letter-spacing: var(--type-caption-letter);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
   color: var(--ink-muted);
 }
 
 .listSection {
-  @include m.card-surface(20px, t.$shadow-soft);
-  padding: 18px;
+  @include m.card-surface(var(--space-4), t.$shadow-soft);
 }
 
 .listSection h2 {
-  font-family: var(--font-display);
-  margin-bottom: 12px;
+  font-family: var(--type-h2-font);
+  font-size: var(--type-h2-size);
+  line-height: var(--type-h2-line);
+  letter-spacing: var(--type-h2-letter);
+  margin-bottom: var(--space-3);
 }
 
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .list > * {
-  flex: 1 1 200px;
+  flex: 1 1 var(--layout-card-min);
   min-width: 0;
 }
 
 .listItem {
   border: 1px solid rgba(122, 75, 42, 0.2);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: var(--surface-strong);
-  padding: 12px 16px;
+  padding: var(--space-3) var(--space-4);
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: var(--btn-font-weight);
 }
 
 .listItem em {
   font-style: normal;
   color: var(--ink-muted);
-  font-size: 12px;
+  font-size: var(--type-caption-size);
 }
 
 .empty,
 .notFound {
   color: var(--ink-muted);
-  font-size: 14px;
+  font-size: var(--type-body-sm-size);
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .page {
     padding: 48px clamp(20px, 6vw, 72px) 80px;
   }
 
   .listSection {
-    padding: 20px;
+    padding: var(--space-5);
   }
 }

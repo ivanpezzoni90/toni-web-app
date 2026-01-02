@@ -1,30 +1,40 @@
 @use "tokens" as t;
 
 @mixin pill-button($bg, $color, $border: none, $shadow: none) {
-  border-radius: t.$radius-pill;
-  padding: 12px 20px;
+  border-radius: var(--btn-radius);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
   border: $border;
   background: $bg;
   color: $color;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: var(--btn-font-weight);
   box-shadow: $shadow;
+  transition: background-color 160ms ease, color 160ms ease,
+    border-color 160ms ease, box-shadow 160ms ease;
+
+  &:hover {
+    background: var(--btn-hover-bg, $bg);
+    color: var(--btn-hover-text, $color);
+  }
 }
 
 @mixin card-surface($padding: 24px, $shadow: t.$shadow-card) {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: t.$radius-card;
+  border-radius: var(--radius-card);
   padding: $padding;
   box-shadow: $shadow;
   backdrop-filter: blur(12px);
 }
 
-@mixin input-field($padding: 12px 14px, $radius: t.$radius-field) {
+@mixin input-field(
+  $padding: var(--space-3) var(--space-4),
+  $radius: var(--radius-field)
+) {
   padding: $padding;
   border-radius: $radius;
   border: 1px solid var(--border);
   background: var(--surface-strong);
   color: var(--ink);
-  font-size: 15px;
+  font-size: var(--type-body-sm-size);
 }

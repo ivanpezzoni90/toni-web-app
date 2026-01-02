@@ -16,20 +16,20 @@ $header-shadow: t.$shadow-header;
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: var(--layout-max);
   margin: 0 auto;
-  padding: 10px 12px;
+  padding: var(--space-3) var(--space-3);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-4);
   min-width: 0;
 }
 
 .brandWrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   min-width: 0;
 }
 
@@ -39,8 +39,8 @@ $header-shadow: t.$shadow-header;
   justify-content: flex-start;
 
   img {
-    width: 32px;
-    height: 32px;
+    width: var(--size-logo-sm);
+    height: var(--size-logo-sm);
   }
 }
 
@@ -48,43 +48,49 @@ $header-shadow: t.$shadow-header;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: var(--space-1);
   min-width: 0;
 }
 
 .backButton {
-  @include m.pill-button(transparent, var(--ink), 1px solid var(--border));
-  padding: 8px 10px;
-  font-size: 12px;
+  @include m.pill-button(
+    var(--btn-ghost-bg),
+    var(--btn-ghost-text),
+    1px solid var(--btn-ghost-border)
+  );
+  --btn-hover-bg: var(--btn-ghost-hover-bg);
+  --btn-hover-text: var(--btn-ghost-text);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--type-caption-size);
 }
 
 .hint {
-  font-size: 12px;
+  font-size: var(--type-caption-size);
   color: var(--ink-muted);
   display: none;
 }
 
 .brand {
-  font-family: var(--font-display);
-  font-size: 16px;
+  font-family: var(--type-h4-font);
+  font-size: var(--type-body-size);
   color: var(--ink);
   white-space: nowrap;
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .inner {
-    padding: 12px 16px;
+    padding: var(--space-3) var(--space-4);
   }
 
   .logoWrap {
     img {
-      width: 36px;
-      height: 36px;
+      width: var(--size-logo-md);
+      height: var(--size-logo-md);
     }
   }
 
   .backButton {
-    padding: 10px 16px;
+    padding: var(--space-3) var(--space-4);
   }
 
   .hint {
@@ -92,6 +98,9 @@ $header-shadow: t.$shadow-header;
   }
 
   .brand {
-    font-size: 18px;
+    font-family: var(--type-h4-font);
+    font-size: var(--type-h4-size);
+    line-height: var(--type-h4-line);
+    letter-spacing: var(--type-h4-letter);
   }
 }

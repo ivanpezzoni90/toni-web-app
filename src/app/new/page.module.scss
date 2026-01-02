@@ -1,8 +1,10 @@
+@use "../../styles/tokens" as t;
+
 .page {
-  padding: 32px 16px 60px;
+  padding: var(--space-6) var(--space-4) var(--space-8);
 }
 
-@media (min-width: 720px) {
+@media (min-width: t.$bp-sm) {
   .page {
     padding: 0;
   }
